@@ -40,6 +40,7 @@ dependencies:
   firebase_crashlytics: ^3.4.18
   flutter_dotenv: ^5.1.0
   flutter_svg: ^2.0.10+1
+  gemini_flutter: ^0.1.1
 
 dev_dependencies:
   flutter_test:
@@ -82,12 +83,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Satoshi
+      fonts:
+        - asset: fonts/Satoshi-Regular.otf
+        - asset: fonts/Satoshi-Medium.otf
+          weight: 500
+        - asset: fonts/Satoshi-Bold.otf
+          weight: 700
+        - asset: fonts/Satoshi-Light.otf
+          weight: 300
+        - asset: fonts/Satoshi-Black.otf
+          weight: 900
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
@@ -107,6 +114,7 @@ spider:
   no_comments: true
   # Exports all the generated file as the one library
   export: true
+  fonts: true
   # This allows you to import all the generated references with 1 single import!
   use_part_of: true
   # Generates a variable that contains a list of all asset values.
@@ -125,4 +133,4 @@ spider:
   groups:
     - path: assets/icons
       class_name: AppIcons
-      types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp, .svg]
+      types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp, .svg] 

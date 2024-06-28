@@ -106,8 +106,8 @@ export 'package:opt_app/constants/config.dart';
 // ? Functions
 
 // ? AssetsPaths
-// export 'package:opt_app/constants/assets.dart';
-// export 'package:opt_app/constants/icons.dart';
+
+export 'package:opt_app/resources/resources.dart';
 
 // * Providers
 // export 'package:opt_app/provider/cart.dart';
@@ -115,9 +115,9 @@ export 'package:opt_app/constants/config.dart';
 // export 'package:opt_app/provider/auth_service.dart';
 
 // * Theme
-// export 'package:opt_app/theme/app_theme.dart';
-// export 'package:opt_app/theme/app_colors.dart';
-// export 'package:opt_app/theme/app_typography.dart';
+export 'package:opt_app/theme/app_theme.dart';
+export 'package:opt_app/theme/app_colors.dart';
+export 'package:opt_app/theme/app_typography.dart';
 
 // * External Packages
 export 'package:flutter/material.dart';
