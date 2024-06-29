@@ -42,6 +42,8 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_gemini: ^2.0.4
   lottie: ^3.1.2
+  intl: ^0.19.0
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:

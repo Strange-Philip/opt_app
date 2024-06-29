@@ -1,0 +1,5 @@
+enum PlatForm {
+  android,
+  ios,
+}
+

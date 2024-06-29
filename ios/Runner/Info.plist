@@ -34,6 +34,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera permission is required to capture image for user profile &amp; identity verification</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>A photo library permission is required to store downloaded image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>A photo library permission is required to select image for user profile &amp; identity verification</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
