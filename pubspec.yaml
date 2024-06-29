@@ -40,7 +40,8 @@ dependencies:
   firebase_crashlytics: ^3.4.18
   flutter_dotenv: ^5.1.0
   flutter_svg: ^2.0.10+1
-  gemini_flutter: ^0.1.1
+  flutter_gemini: ^2.0.4
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
     - assets/
     - assets/images
     - assets/icons
+    - assets/animations
     - .env
   #   - images/a_dot_ham.jpeg
 
@@ -134,3 +136,6 @@ spider:
     - path: assets/icons
       class_name: AppIcons
       types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp, .svg] 
+    - path: assets/animations
+      class_name: AppLottie
+      types: [ .png, .jpg, .jpeg, .webp, .webm, .json, .svg] 

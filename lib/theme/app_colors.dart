@@ -25,17 +25,31 @@ class AppColors {
   ///  `AppColors.primary.shade.50`
 
   static final MaterialColor primary =
-      MaterialColor(const Color(0xFF8B5CF6).value, const <int, Color>{
-    50: Color(0xFFF5F3FF),
-    100: Color(0xFFEDE9FE),
-    200: Color(0xFFDDD6FE),
-    300: Color(0xFFC4B5FD),
-    400: Color(0xFFA78BFA),
-    500: Color(0xFF8B5CF6),
-    600: Color(0xFF7C3AED),
-    700: Color(0xFF6D28D9),
-    800: Color(0xFF5B21B6),
-    900: Color(0xFF4C1D95),
+      MaterialColor(const Color(0xFF274cc8).value, const <int, Color>{
+    50: Color(0xFFE8EAF6),
+    100: Color(0xFFC5CAE9),
+    200: Color(0xFF9FA8DA),
+    300: Color(0xFF7986CB),
+    400: Color(0xFF5C6BC0),
+    500: Color(0xFF3F51B5),
+    600: Color(0xFF394AAE),
+    700: Color(0xFF3140A5),
+    800: Color(0xFF29379D),
+    900: Color(0xFF1A237E),
+  });
+
+  static final MaterialColor secondary =
+      MaterialColor(const Color(0xff4adddd).value, const <int, Color>{
+    50: Color(0xFFE0F7FA),
+    100: Color(0xFFB2EBF2),
+    200: Color(0xFF80DEEA),
+    300: Color(0xFF4DD0E1),
+    400: Color(0xFF26C6DA),
+    500: Color(0xFF00BCD4),
+    600: Color(0xFF00ACC1),
+    700: Color(0xFF0097A7),
+    800: Color(0xFF00838F),
+    900: Color(0xFF006064),
   });
 
   /// usage:

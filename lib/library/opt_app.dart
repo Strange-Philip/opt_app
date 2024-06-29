@@ -123,6 +123,7 @@ export 'package:opt_app/theme/app_typography.dart';
 export 'package:flutter/material.dart';
 export 'dart:convert';
 export 'dart:io';
+export 'package:flutter_gemini/flutter_gemini.dart';
 // export 'package:flutter/foundation.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter_dotenv/flutter_dotenv.dart';
