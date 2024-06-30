@@ -6,21 +6,23 @@ library opt_app;
 
 //? Features Screens
 export "package:opt_app/features/onboarding/onboarding_page.dart";
+export "package:opt_app/features/home/homepage.dart";
+export 'package:opt_app/features/onboarding/intro.dart';
 
 // * Services
 export 'package:opt_app/constants/config.dart';
+export 'package:opt_app/constants/feature_flags.dart';
+export 'package:opt_app/constants/remote_config_repository.dart';
 
 // * Routes
 // export 'package:opt_app/routes/router_config.dart';
 
 // * Models
-// export 'package:opt_app/features/onboarding/models/onboard_models.dart';
+export 'package:opt_app/models/complaint.dart';
 // export 'package:opt_app/model/wooimage.dart';
 // export 'package:opt_app/features/profile/models/user_address_model.dart';
 // export 'package:opt_app/provider/orders.dart';
 // export 'package:opt_app/model/brand.dart';
-
-// export 'package:opt_app/constants/remote_config_repository.dart';
 
 //* Constants
 // export 'package:opt_app/constants/data.dart';
@@ -31,9 +33,11 @@ export 'package:opt_app/constants/config.dart';
 // * Widgets
 export 'package:opt_app/components/butttons/primary_button.dart';
 export 'package:opt_app/components/butttons/secondary_button.dart';
+export 'package:opt_app/components/appbar.dart';
+export 'package:opt_app/components/complaint_chip.dart';
+export 'package:opt_app/features/home/select_complaints.dart';
 // export 'package:opt_app/features/onboarding/components/indicator.dart';
 // export 'package:opt_app/features/onboarding/components/text_component.dart';
-
 
 // * Utils
 // ? Extensions
@@ -66,6 +70,8 @@ export 'package:flutter_gemini/flutter_gemini.dart';
 export 'package:flutter/foundation.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter_dotenv/flutter_dotenv.dart';
+export 'package:lottie/lottie.dart';
+export 'package:flutter_svg/svg.dart';
 
 // *Firebase
 export 'package:firebase_core/firebase_core.dart';

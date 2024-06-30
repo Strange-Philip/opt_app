@@ -1,18 +1,23 @@
 import 'package:opt_app/library/opt_app.dart';
 
-class OnboardingPage extends StatefulWidget {
-  const OnboardingPage({super.key});
+class IntroPage extends StatelessWidget {
+  const IntroPage({super.key});
 
-  @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
-}
-
-class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
+        },
+        child: const Icon(Icons.arrow_forward),
+      ),
+      body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 24),
@@ -22,7 +27,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Lottie.asset(AppLottie.intro),
+              child: Lottie.asset(AppLottie.logo),
             ),
             const SizedBox(
               height: 12,
@@ -37,20 +42,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
             const SizedBox(
               height: 12,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 24),
-              child: PrimaryButton(
-                text: "Let's go",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                },
-              ),
-            )
           ],
         ),
       ),

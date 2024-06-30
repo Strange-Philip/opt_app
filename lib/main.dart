@@ -1,6 +1,7 @@
 import 'package:opt_app/library/opt_app.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -8,8 +9,9 @@ void main() async {
   Gemini.init(
     apiKey: Config.geminiApiKey,
   );
+
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  // await RemoteConfigRepository.init();
+  await RemoteConfigRepository.init();
   PlatformDispatcher.instance.onError = (error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
@@ -25,7 +27,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme().light,
-      home: Container(),
+      home: const OnboardingPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

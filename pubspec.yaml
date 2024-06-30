@@ -70,9 +70,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/images
-    - assets/icons
-    - assets/animations
+    # - assets/images
+    - assets/icons/
+    - assets/animations/
     - .env
   #   - images/a_dot_ham.jpeg
 
@@ -140,4 +140,4 @@ spider:
       types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp, .svg] 
     - path: assets/animations
       class_name: AppLottie
-      types: [ .png, .jpg, .jpeg, .webp, .webm, .json, .svg] 
+      types: [ .png, .jpg, .jpeg, .webp, .webm, .json, .svg, .gif] 

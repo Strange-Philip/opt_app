@@ -43,7 +43,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         child: Container(
           width: double.infinity,
           height: 56,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 17.5),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
           decoration: ShapeDecoration(
             color: AppColors.primary,
             shape: RoundedRectangleBorder(
@@ -53,16 +55,18 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           child: loading
               ? const Center(
                   child: Padding(
-                      padding: EdgeInsets.only(bottom: 15),
+                      padding: EdgeInsets.all(16),
                       child: CircularProgressIndicator(
-                        strokeWidth: 6,
+                        strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
                       )),
                 )
-              : Text(
-                  widget.text,
-                  textAlign: TextAlign.center,
-                  style: AppTypography().baseMedium.copyWith(color: AppColors.white),
+              : Center(
+                  child: Text(
+                    widget.text,
+                    textAlign: TextAlign.center,
+                    style: AppTypography().largeMedium.copyWith(color: AppColors.white),
+                  ),
                 ),
         ),
       ),
