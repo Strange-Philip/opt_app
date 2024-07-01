@@ -8,6 +8,8 @@ library opt_app;
 export "package:opt_app/features/onboarding/onboarding_page.dart";
 export "package:opt_app/features/home/homepage.dart";
 export 'package:opt_app/features/onboarding/intro.dart';
+export 'package:opt_app/features/home/select_location.dart';
+export 'package:opt_app/features/home/add_photo.dart';
 
 // * Services
 export 'package:opt_app/constants/config.dart';
@@ -36,6 +38,7 @@ export 'package:opt_app/components/butttons/secondary_button.dart';
 export 'package:opt_app/components/appbar.dart';
 export 'package:opt_app/components/complaint_chip.dart';
 export 'package:opt_app/features/home/select_complaints.dart';
+export 'package:opt_app/components/location_card.dart';
 // export 'package:opt_app/features/onboarding/components/indicator.dart';
 // export 'package:opt_app/features/onboarding/components/text_component.dart';
 
@@ -46,7 +49,7 @@ export 'package:opt_app/library/extensions/general_extensions.dart';
 // export 'package:opt_app/utils/extensions/show_modal_extentions.dart';
 
 // ? Enums
-// export 'package:opt_app/utils/enums/enums.dart';
+export 'package:opt_app/library/enums/enums.dart';
 // ? Functions
 
 // ? AssetsPaths

@@ -29,18 +29,28 @@ class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
                 color: AppColors.white,
                 fontWeight: FontWeight.w400,
               )),
+      leadingWidth: 95,
       leading: hasLeading!
           ? GestureDetector(
               onTap: () {
                 Navigator.pop(context);
               },
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.asset(
-                  AppIcons.arrowNarrowLeft,
-                  height: 24,
-                  width: 24,
-                  colorFilter: const ColorFilter.mode(AppColors.black, BlendMode.srcIn),
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.gray.shade100,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 12),
+                    child: Center(
+                      child: Text("back",
+                          style: AppTypography().baseMedium.copyWith(
+                                color: AppColors.black,
+                              )),
+                    ),
+                  ),
                 ),
               ),
             )

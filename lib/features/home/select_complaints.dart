@@ -80,7 +80,14 @@ class _SelectComplaintState extends State<SelectComplaint> {
               PrimaryButton(
                 text: "Next",
                 isEnabled: selectedComplaints.isNotEmpty,
-                onPressed: () async {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectLocationPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 30)
             ],

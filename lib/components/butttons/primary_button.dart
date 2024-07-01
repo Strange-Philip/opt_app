@@ -65,7 +65,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   child: Text(
                     widget.text,
                     textAlign: TextAlign.center,
-                    style: AppTypography().largeMedium.copyWith(color: AppColors.white),
+                    style: AppTypography().largeSemiBold.copyWith(color: AppColors.white),
                   ),
                 ),
         ),

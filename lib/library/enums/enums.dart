@@ -3,3 +3,4 @@ enum PlatForm {
   ios,
 }
 
+enum EyeForComplaint { left, right, both }
