@@ -10,6 +10,8 @@ export "package:opt_app/features/home/homepage.dart";
 export 'package:opt_app/features/onboarding/intro.dart';
 export 'package:opt_app/features/home/select_location.dart';
 export 'package:opt_app/features/home/add_photo.dart';
+export 'package:opt_app/features/home/add_ocular_health.dart';
+export 'package:opt_app/features/home/add_medical_health.dart';
 
 // * Services
 export 'package:opt_app/constants/config.dart';
@@ -39,6 +41,7 @@ export 'package:opt_app/components/appbar.dart';
 export 'package:opt_app/components/complaint_chip.dart';
 export 'package:opt_app/features/home/select_complaints.dart';
 export 'package:opt_app/components/location_card.dart';
+export 'package:opt_app/components/tab_select_card.dart';
 // export 'package:opt_app/features/onboarding/components/indicator.dart';
 // export 'package:opt_app/features/onboarding/components/text_component.dart';
 

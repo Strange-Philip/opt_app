@@ -5,6 +5,8 @@ class RemoteConfigRepository {
   static final _remoteConfig = FirebaseRemoteConfig.instance;
 
   static List<Complaint> complaintList = [];
+  static List<Complaint> medicalHealthList = [];
+  static List<Complaint> ocularHealthList = [];
 
   static Future init() async {
     try {
@@ -27,6 +29,13 @@ class RemoteConfigRepository {
   static Future _updateConfigs(RemoteConfigUpdate remoteConfigUpdate) async {
     await _remoteConfig.activate();
     complaintList = Set.from(jsonDecode(_remoteConfig.getString(kcomplaints)))
+        .map((e) => Complaint.fromJson(e))
+        .toList();
+
+    medicalHealthList = Set.from(jsonDecode(_remoteConfig.getString(kmedicalHealth)))
+        .map((e) => Complaint.fromJson(e))
+        .toList();
+    ocularHealthList = Set.from(jsonDecode(_remoteConfig.getString(kocularHealth)))
         .map((e) => Complaint.fromJson(e))
         .toList();
   }

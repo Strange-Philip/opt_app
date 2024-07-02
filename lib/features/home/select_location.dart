@@ -70,7 +70,7 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddPhotos(),
+                      builder: (context) => const OcularHealthSelect(),
                     ),
                   );
                 },
