@@ -204,13 +204,15 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
                               Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      generateitinerary();
+                                    },
                                     child: Text(
                                       "Doesn't look right? Regenerate",
                                       style: AppTypography().baseSemiBold.copyWith(
-                                            color: AppColors.primary.shade400,
-                                            decoration: TextDecoration.underline,
-                                          ),
+                                          color: AppColors.primary.shade400,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor: AppColors.primary.shade400),
                                     ),
                                   )),
                               const SizedBox(
