@@ -1,7 +1,8 @@
 import 'package:opt_app/library/opt_app.dart';
 
 class SelectLocationPage extends StatefulWidget {
-  const SelectLocationPage({super.key});
+    final List<String> complaints;
+  const SelectLocationPage({super.key, required this.complaints});
 
   @override
   State<SelectLocationPage> createState() => _SelectLocationPageState();
@@ -70,7 +71,10 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const OcularHealthSelect(),
+                      builder: (context) =>  OcularHealthSelect(
+                        complaints: widget.complaints,
+                        location: eyeForComplaint!,
+                      ),
                     ),
                   );
                 },

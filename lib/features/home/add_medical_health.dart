@@ -1,7 +1,12 @@
 import 'package:opt_app/library/opt_app.dart';
 
 class MedicalHealthSelect extends StatefulWidget {
-  const MedicalHealthSelect({super.key});
+  final List<String> complaints;
+  final EyeForComplaint location;
+  final List<String> ocularHealth;
+
+  const MedicalHealthSelect(
+      {super.key, required this.complaints, required this.location, required this.ocularHealth});
 
   @override
   State<MedicalHealthSelect> createState() => _MedicalHealthSelectState();
@@ -24,7 +29,12 @@ class _MedicalHealthSelectState extends State<MedicalHealthSelect> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddPhotos(),
+                builder: (context) => AddPhotos(
+                  complaints: widget.complaints,
+                  location: widget.location,
+                  ocularHealth: widget.ocularHealth,
+                  medicalHealth: selectedMedicalHealth,
+                ),
               ),
             );
           },

@@ -3,40 +3,36 @@ import 'package:image_picker/image_picker.dart';
 import 'package:opt_app/library/opt_app.dart';
 
 class AddPhotos extends StatefulWidget {
-  const AddPhotos({super.key});
+  final List<String> complaints;
+  final EyeForComplaint location;
+  final List<String> ocularHealth;
+  final List<String> medicalHealth;
+
+  const AddPhotos(
+      {super.key,
+      required this.complaints,
+      required this.location,
+      required this.ocularHealth,
+      required this.medicalHealth});
 
   @override
   State<AddPhotos> createState() => _AddPhotosState();
 }
 
 class _AddPhotosState extends State<AddPhotos> {
-  List<String>? images = [];
-  List<String>? localimages = [];
-  // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  // FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  List<Uint8List>? images = [];
+  XFile? image;
   void picUploadImage(ImageSource imageSource) async {
-    final image = await ImagePicker().pickImage(source: imageSource, imageQuality: 75);
-    // showDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return const LoadingAlert(message: "Uploading Picture");
-    //     });
+    final image = await ImagePicker().pickImage(source: imageSource, imageQuality: 90);
 
-    // Reference ref = FirebaseStorage.instance.ref().child("emergency" + "pic.jpg");
-    // await ref.putFile(File(image!.path));
-    // setState(() {
-    //   localimages!.add(image.path);
-    // });
-    // print(localimages);
-
-    // ref.getDownloadURL().then((value) {
-    //   print(value);
-    //   setState(() {
-    //     images!.add(value);
-    //   });
-    //   print(images);
-    //   value.isNotEmpty ? Navigator.pop(context) : SizedBox();
-    // });
+    if (image == null) {
+      return;
+    } else {
+      setState(() {
+        this.image = image;
+        images = [File(image.path).readAsBytesSync()];
+      });
+    }
   }
 
   @override
@@ -54,7 +50,14 @@ class _AddPhotosState extends State<AddPhotos> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const SelectComplaint(),
+                builder: (context) => GenerateDiagnosisPage(
+                  complaints: widget.complaints,
+                  location: widget.location,
+                  ocularHealth: widget.ocularHealth,
+                  medicalHealth: widget.medicalHealth,
+                  images: images,
+                  path: image!.path,
+                ),
               ),
             );
           },
@@ -84,37 +87,70 @@ class _AddPhotosState extends State<AddPhotos> {
                 style: AppTypography().baseMedium,
                 maxLines: 2,
               ),
-              GestureDetector(
-                onTap: () {
-                  showBtnImageChoice(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: DottedBorder(
-                      color: AppColors.primary.shade200,
-                      strokeWidth: 2,
-                      borderType: BorderType.RRect,
-                      radius: const Radius.circular(14),
-                      borderPadding: const EdgeInsets.all(8),
-                      dashPattern: const <double>[20, 5],
-                      child: Center(
-                        child: Text(
-                          "Add photo",
-                          style: AppTypography().baseSemiBold.copyWith(
-                                color: AppColors.primary.shade400,
+              const SizedBox(
+                height: 24,
+              ),
+              image != null
+                  ? Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        image: DecorationImage(
+                          image: FileImage(File(image!.path)),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        showBtnImageChoice(context);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        child: SizedBox(
+                          height: 200,
+                          width: double.infinity,
+                          child: DottedBorder(
+                            color: AppColors.primary.shade200,
+                            strokeWidth: 2,
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(14),
+                            borderPadding: const EdgeInsets.all(8),
+                            dashPattern: const <double>[20, 5],
+                            child: Center(
+                              child: Text(
+                                "Add photo",
+                                style: AppTypography().baseSemiBold.copyWith(
+                                      color: AppColors.primary.shade400,
+                                    ),
+                                maxLines: 2,
                               ),
-                          maxLines: 2,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
+              image != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: GestureDetector(
+                        onTap: () {
+                          showBtnImageChoice(context);
+                        },
+                        child: Center(
+                          child: Text(
+                            "Change Image",
+                            style: AppTypography().baseSemiBold.copyWith(
+                                  color: AppColors.primary.shade400,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                        ),
+                      ))
+                  : const SizedBox.shrink(),
             ],
           ),
         ),

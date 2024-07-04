@@ -2,6 +2,7 @@ import 'package:opt_app/library/opt_app.dart';
 
 class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final Widget? titleWidget;
   final List<Widget>? actions;
   final bool? hasLeading;
   final PreferredSizeWidget? bottom;
@@ -14,6 +15,7 @@ class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.hasLeading = true,
     this.bottom,
     this.toolbarHeight = 65,
+    this.titleWidget,
   });
 
   @override
@@ -24,11 +26,13 @@ class AppAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       toolbarHeight: toolbarHeight,
       bottom: bottom,
-      title: Text(title ?? '',
-          style: AppTypography().largeMedium.copyWith(
-                color: AppColors.white,
-                fontWeight: FontWeight.w400,
-              )),
+      surfaceTintColor: Colors.transparent,
+      title: titleWidget ??
+          Text(title ?? '',
+              style: AppTypography().largeMedium.copyWith(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400,
+                  )),
       leadingWidth: 95,
       leading: hasLeading!
           ? GestureDetector(

@@ -84,7 +84,9 @@ class _SelectComplaintState extends State<SelectComplaint> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SelectLocationPage(),
+                      builder: (context) => SelectLocationPage(
+                        complaints: selectedComplaints,
+                      ),
                     ),
                   );
                 },
