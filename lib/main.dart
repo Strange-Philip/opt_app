@@ -1,7 +1,12 @@
 import 'package:opt_app/library/opt_app.dart';
+import 'package:opt_app/models/savedDiagnosis.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  await Hive.initFlutter();
+  Hive.registerAdapter(DiagnosisAdapter());
+  Hive.registerAdapter(SavedDiagnosisAdapter());
+ diagnosesBox = await Hive.openBox<SavedDiagnosis>('diagnosisBox');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

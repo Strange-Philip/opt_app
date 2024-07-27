@@ -1,9 +1,9 @@
 import 'package:opt_app/library/opt_app.dart';
 
-class TentDiagnosisCard extends StatelessWidget {
-  final TentDiagnosis tentDiagnosis;
+class DiagnosisCard extends StatelessWidget {
+  final Diagnosis diagnosis;
   final int index;
-  const TentDiagnosisCard({super.key, required this.tentDiagnosis, required this.index});
+  const DiagnosisCard({super.key, required this.diagnosis, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class TentDiagnosisCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "$index - ${tentDiagnosis.diagnosis}",
+              "$index - ${diagnosis.diagnosis}",
               style: AppTypography().extraLargeBold,
               maxLines: 2,
             ),
@@ -22,7 +22,7 @@ class TentDiagnosisCard extends StatelessWidget {
               height: 4,
             ),
             Text(
-              tentDiagnosis.reason!,
+              diagnosis.reason!,
               style: AppTypography().baseMedium.copyWith(color: AppColors.black),
               maxLines: 10,
             ),
@@ -39,7 +39,7 @@ class TentDiagnosisCard extends StatelessWidget {
                     ),
               ),
               TextSpan(
-                text: " ${tentDiagnosis.symptoms.join(", ")}",
+                text: " ${diagnosis.symptoms.join(", ")}",
                 style: AppTypography().baseMedium.copyWith(color: AppColors.black),
               ),
             ])),
@@ -56,7 +56,7 @@ class TentDiagnosisCard extends StatelessWidget {
                     ),
               ),
               TextSpan(
-                text: " ${tentDiagnosis.ocularTests.join(", ")}",
+                text: " ${diagnosis.ocularTests.join(", ")}",
                 style: AppTypography().baseMedium.copyWith(color: AppColors.black),
               ),
             ])),

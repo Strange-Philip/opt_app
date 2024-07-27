@@ -1,5 +1,6 @@
 import 'package:opt_app/components/cards/diagnosis_card.dart';
 import 'package:opt_app/library/opt_app.dart';
+import 'package:opt_app/models/savedDiagnosis.dart';
 
 class GenerateDiagnosisPage extends StatefulWidget {
   final List<String> complaints;
@@ -25,8 +26,10 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
   final Gemini gemini = Gemini.instance;
   bool loading = true;
   String generatedText = "";
-  List<TentDiagnosis> diagnosisList = [];
+  List<Diagnosis> diagnosisList = [];
   bool error = false;
+  var uuid = const Uuid();
+  String id = "";
 
   Future<bool> isValidJson(String jsonString) async {
     try {
@@ -81,7 +84,7 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
         if (await isValidJson(text) == true) {
           for (var jsonString in [text]) {
             for (var item in jsonDecode(jsonString)) {
-              diagnosisList.length >= 3 ? null : diagnosisList.add(TentDiagnosis.fromJson(item));
+              diagnosisList.length >= 3 ? null : diagnosisList.add(Diagnosis.fromJson(item));
             }
           }
           setState(() {
@@ -115,6 +118,7 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
   @override
   void initState() {
     generateitinerary();
+    id = uuid.v1().toString();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) async {
       generateitinerary();
@@ -183,8 +187,8 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
                           children: diagnosisList.map((diagnosis) {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 12),
-                              child: TentDiagnosisCard(
-                                tentDiagnosis: diagnosis,
+                              child: DiagnosisCard(
+                                diagnosis: diagnosis,
                                 index: diagnosisList.indexOf(diagnosis) + 1,
                               ),
                             );
@@ -199,7 +203,16 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
                             children: [
                               PrimaryButton(
                                 text: "Save",
-                                onPressed: () {},
+                                onPressed: () {
+                                  diagnosesBox
+                                      .put(
+                                          id,
+                                          SavedDiagnosis(
+                                              id: id,
+                                              image: widget.path,
+                                              diagnosisList: diagnosisList))
+                                      .then((value) => null);
+                                },
                               ),
                               Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -245,7 +258,7 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
               ),
               const SizedBox(height: 8),
               Text(
-                "We couldn't generate a diagnosis for your patient. Please try again.",
+                "We couldn't generate a tentative diagnosis for your patient. Please try again.",
                 style: AppTypography().baseSemiBold,
                 maxLines: 2,
                 textAlign: TextAlign.center,
