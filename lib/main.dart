@@ -6,7 +6,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(DiagnosisAdapter());
   Hive.registerAdapter(SavedDiagnosisAdapter());
- diagnosesBox = await Hive.openBox<SavedDiagnosis>('diagnosisBox');
+  diagnosesBox = await Hive.openBox<SavedDiagnosis>('diagnosisBox');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

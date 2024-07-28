@@ -49,6 +49,7 @@ dependencies:
   hive_flutter: ^1.1.0
   build_runner: ^2.4.9
   uuid: ^4.4.2
+  # firebase_vertexai: ^0.2.2
   
 
 dev_dependencies:

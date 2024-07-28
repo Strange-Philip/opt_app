@@ -67,6 +67,7 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
           .textAndImage(
               text: question,
               images: widget.images!,
+              modelName: "gemini-pro-vision",
               safetySettings: [
                 SafetySetting(
                   category: SafetyCategory.hateSpeech,
