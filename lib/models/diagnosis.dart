@@ -8,9 +8,9 @@ class Diagnosis {
   @HiveField(1)
   String? reason;
   @HiveField(2)
-  List<String> symptoms = [];
+  List<dynamic> symptoms = [];
   @HiveField(3)
-  List<String> ocularTests = [];
+  List<dynamic> ocularTests = [];
 
   Diagnosis(
       {this.diagnosis = "",
@@ -21,8 +21,8 @@ class Diagnosis {
   Diagnosis.fromJson(Map<String, dynamic> json) {
     diagnosis = json['diagnosis'];
     reason = json['reason'];
-    symptoms = json['symptoms'].cast<String>();
-    ocularTests = json['ocularTests'].cast<String>();
+    symptoms = json['symptoms'];
+    ocularTests = json['ocularTests'];
   }
 
   Map<String, dynamic> toJson() {

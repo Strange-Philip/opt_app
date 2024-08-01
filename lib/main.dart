@@ -11,10 +11,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Gemini.init(
-    apiKey: Config.geminiApiKey,
-  );
-
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   await RemoteConfigRepository.init();
   PlatformDispatcher.instance.onError = (error, stack) {

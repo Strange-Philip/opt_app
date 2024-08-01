@@ -40,7 +40,7 @@ dependencies:
   firebase_crashlytics: ^3.4.18
   flutter_dotenv: ^5.1.0
   flutter_svg: ^2.0.10+1
-  flutter_gemini: ^2.0.4
+  google_generative_ai: ^0.4.3
   lottie: ^3.1.2
   intl: ^0.19.0
   image_picker: ^1.0.7
@@ -49,7 +49,8 @@ dependencies:
   hive_flutter: ^1.1.0
   build_runner: ^2.4.9
   uuid: ^4.4.2
-  # firebase_vertexai: ^0.2.2
+  cloud_firestore: ^4.15.8
+  firebase_storage: ^11.6.8
   
 
 dev_dependencies:

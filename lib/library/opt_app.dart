@@ -12,6 +12,7 @@ export 'package:opt_app/features/home/select_location.dart';
 export 'package:opt_app/features/home/add_photo.dart';
 export 'package:opt_app/features/home/add_ocular_health.dart';
 export 'package:opt_app/features/home/add_medical_health.dart';
+export 'package:opt_app/features/home/diagnose_details_page.dart';
 
 // * Services
 export 'package:opt_app/constants/config.dart';
@@ -71,7 +72,6 @@ export 'package:opt_app/theme/app_typography.dart';
 export 'package:flutter/material.dart';
 export 'dart:convert';
 export 'dart:io';
-export 'package:flutter_gemini/flutter_gemini.dart';
 export 'package:flutter/foundation.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter_dotenv/flutter_dotenv.dart';

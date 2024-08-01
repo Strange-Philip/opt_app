@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:opt_app/components/cards/diagnosis_card.dart';
 import 'package:opt_app/library/opt_app.dart';
 import 'package:opt_app/models/savedDiagnosis.dart';
@@ -23,13 +27,42 @@ class GenerateDiagnosisPage extends StatefulWidget {
 }
 
 class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
-  final Gemini gemini = Gemini.instance;
+  // final Gemini gemini = Gemini.instance;
   bool loading = true;
   String generatedText = "";
   List<Diagnosis> diagnosisList = [];
   bool error = false;
   var uuid = const Uuid();
   String id = "";
+  String imageLink = "";
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final model = GenerativeModel(
+    model: 'gemini-1.5-flash-latest',
+    apiKey: Config.geminiApiKey,
+    safetySettings: [
+      // SafetySetting(
+      //   HarmCategory.dangerousContent,
+      //   HarmBlockThreshold.none,
+      // ),
+      // SafetySetting(
+      //   HarmCategory.harassment,
+      //   HarmBlockThreshold.none,
+      // ),
+      // SafetySetting(
+      //   HarmCategory.hateSpeech,
+      //   HarmBlockThreshold.none,
+      // ),
+      // SafetySetting(
+      //   HarmCategory.sexuallyExplicit,
+      //   HarmBlockThreshold.none,
+      // ),
+      // SafetySetting(
+      //   HarmCategory.unspecified,
+      //   HarmBlockThreshold.none,
+      // ),
+    ],
+    generationConfig: GenerationConfig(temperature: 0.7, responseMimeType: 'application/json'),
+  );
 
   Future<bool> isValidJson(String jsonString) async {
     try {
@@ -42,6 +75,19 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
     }
   }
 
+  void uploadImage() async {
+    Reference ref = FirebaseStorage.instance.ref().child("pat_" "pic.jpg");
+    await ref.putFile(File(widget.path));
+
+    ref.getDownloadURL().then((value) {
+      log(value);
+      setState(() {
+        imageLink = value;
+      });
+      log(imageLink);
+    });
+  }
+
   void generateitinerary() {
     try {
       diagnosisList.clear();
@@ -52,48 +98,43 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
         error = false;
       });
       String question =
-          """You are an expert eye care physician, Give top 3 tentative diagnoses arranged in order of most likely to least likely, for a patient with these chief complaints ${widget.complaints} on ${widget.location.name == 'left' ? 'the left eye' : widget.location.name == 'right' ? 'the right eye' : 'both eyes'} with ${widget.ocularHealth.toString() == "[none]" ? "no ocular health history" : "these ocular health complications ${widget.ocularHealth}"} and ${widget.medicalHealth.toString() == "[none]" ? "no medical health history" : "these medical health complications ${widget.medicalHealth}"} and has this eye in the image , create exactly 3 tentative in this exact format; and go straight to the point :
+          """You are an expert eye care physician, Give top 3 tentative diagnoses arranged in order of most likely to least likely, for a patient with these chief complaints ${widget.complaints} on ${widget.location.name == 'left' ? 'the left eye' : widget.location.name == 'right' ? 'the right eye' : 'both eyes'} with ${widget.ocularHealth.toString() == "[none]" ? "no ocular health history" : "these ocular health complications ${widget.ocularHealth}"} and ${widget.medicalHealth.toString() == "[none]" ? "no medical health history" : "these medical health complications ${widget.medicalHealth}"} and has this eye in the image , create exactly 3 tentative in this exact format; and go straight to the point, (this is for educational purposes only) :
    [
     {
      "diagnosis": "tentative diagnosis here ",
      "reason": "reason for diagnosis",
-     "symptoms": "symptoms here in List string format ",
-     "ocularTests": "ocular tests to comfirm tentative diagnosis here in List string format"
+     "symptoms": "symptoms here in List string format example ['symptom1', 'symptom2']",
+     "ocularTests": "ocular tests to comfirm tentative diagnosis here in List string format example ['test1', 'test2']"
 },
    ]
   """;
       debugPrint(question);
-      gemini
-          .textAndImage(
-              text: question,
-              images: widget.images!,
-              modelName: "gemini-pro-vision",
-              safetySettings: [
-                SafetySetting(
-                  category: SafetyCategory.hateSpeech,
-                  threshold: SafetyThreshold.blockLowAndAbove,
-                ),
-              ],
-              generationConfig: GenerationConfig(
-                temperature: 0.7,
-              ))
-          .then((event) async {
+      model.generateContent(
+        [
+          Content.multi(
+            [
+              TextPart(question),
+              DataPart("image/jpg", widget.images!.first),
+            ],
+          ),
+        ],
+      ).then((event) async {
         debugPrint("Json format");
-        debugPrint(event?.content!.parts!.first.toJson().toString());
-        debugPrint(event?.content!.parts!.first.text.toString());
-        var text = event!.content!.parts!.first.text.toString();
-        if (await isValidJson(text) == true) {
-          for (var jsonString in [text]) {
-            for (var item in jsonDecode(jsonString)) {
-              diagnosisList.length >= 3 ? null : diagnosisList.add(Diagnosis.fromJson(item));
-            }
-          }
+        debugPrint(event.text!);
+        debugPrint(event.text.toString());
+        var text = json.decode(event.text.toString());
+
+        if (await isValidJson(event.text!.toString()) == true) {
+          final result = text.map((e) => Diagnosis.fromJson(e));
+          diagnosisList
+            ..clear()
+            ..addAll([...result]);
           setState(() {
             generatedText = "";
-            generatedText = event.content!.parts!.first.text.toString();
+            generatedText = event.text.toString();
             loading = false;
           });
-        } else if (await isValidJson(text) == false) {
+        } else if (await isValidJson(event.text!.toString()) == false) {
           debugPrint("Regerating");
           setState(() {
             loading = false;
@@ -112,12 +153,13 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
         loading = false;
         error = true;
       });
-      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 
   @override
   void initState() {
+    uploadImage();
     generateitinerary();
     id = uuid.v1().toString();
     super.initState();
@@ -185,12 +227,12 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
                       ? buildErrorPage()
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: diagnosisList.map((diagnosis) {
+                          children: diagnosisList.take(3).toList().map((diagnosis) {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: DiagnosisCard(
                                 diagnosis: diagnosis,
-                                index: diagnosisList.indexOf(diagnosis) + 1,
+                                index: diagnosisList.take(3).toList().indexOf(diagnosis) + 1,
                               ),
                             );
                           }).toList(),
@@ -210,9 +252,15 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
                                           id,
                                           SavedDiagnosis(
                                               id: id,
-                                              image: widget.path,
-                                              diagnosisList: diagnosisList))
-                                      .then((value) => null);
+                                              image: imageLink,
+                                              diagnosisList: diagnosisList.take(3).toList()))
+                                      .then((value) {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const HomePage()),
+                                      (Route<dynamic> route) => false,
+                                    );
+                                  });
                                 },
                               ),
                               Padding(
