@@ -10,13 +10,16 @@ class SavedDiagnosis {
   String? image;
   @HiveField(2)
   List<Diagnosis> diagnosisList = [];
+  @HiveField(3)
+  String? date;
 
-  SavedDiagnosis({this.id = "", this.image = "", this.diagnosisList = const []});
+  SavedDiagnosis({this.id = "", this.image = "", this.diagnosisList = const [], this.date = ""});
 
   SavedDiagnosis.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
     diagnosisList = json['diagnosisList'].cast<Diagnosis>();
+    date = json['date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,6 +27,7 @@ class SavedDiagnosis {
     data['id'] = id;
     data['image'] = image;
     data['diagnosisList'] = diagnosisList;
+    data['date'] = date;
     return data;
   }
 }

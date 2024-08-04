@@ -40,26 +40,18 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
     model: 'gemini-1.5-flash-latest',
     apiKey: Config.geminiApiKey,
     safetySettings: [
-      // SafetySetting(
-      //   HarmCategory.dangerousContent,
-      //   HarmBlockThreshold.none,
-      // ),
-      // SafetySetting(
-      //   HarmCategory.harassment,
-      //   HarmBlockThreshold.none,
-      // ),
-      // SafetySetting(
-      //   HarmCategory.hateSpeech,
-      //   HarmBlockThreshold.none,
-      // ),
-      // SafetySetting(
-      //   HarmCategory.sexuallyExplicit,
-      //   HarmBlockThreshold.none,
-      // ),
-      // SafetySetting(
-      //   HarmCategory.unspecified,
-      //   HarmBlockThreshold.none,
-      // ),
+      SafetySetting(
+        HarmCategory.harassment,
+        HarmBlockThreshold.none,
+      ),
+      SafetySetting(
+        HarmCategory.hateSpeech,
+        HarmBlockThreshold.medium,
+      ),
+      SafetySetting(
+        HarmCategory.sexuallyExplicit,
+        HarmBlockThreshold.none,
+      ),
     ],
     generationConfig: GenerationConfig(temperature: 0.7, responseMimeType: 'application/json'),
   );
@@ -80,16 +72,12 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
     final imagesRef = storageRef.child("images/${"pat_${widget.path}" "pic.jpg"}");
 
     try {
-      // Upload the file
       await imagesRef.putFile(File(widget.path));
-
-      // Get the download URL
       final downloadURL = await imagesRef.getDownloadURL();
       log("Download URL: $downloadURL");
       setState(() {
         imageLink = downloadURL;
       });
-      // Show the download URL
     } catch (e) {
       log("Error uploading image: $e");
     }
@@ -256,11 +244,13 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
                                 onPressed: () {
                                   diagnosesBox
                                       .put(
-                                          id,
-                                          SavedDiagnosis(
-                                              id: id,
-                                              image: imageLink,
-                                              diagnosisList: diagnosisList.take(3).toList()))
+                                    id,
+                                    SavedDiagnosis(
+                                        id: id,
+                                        image: imageLink,
+                                        diagnosisList: diagnosisList.take(3).toList(),
+                                        date: DateTime.now().toString()),
+                                  )
                                       .then((value) {
                                     Navigator.pushAndRemoveUntil(
                                       context,

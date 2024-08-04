@@ -42,8 +42,7 @@ export 'package:opt_app/components/location_card.dart';
 export 'package:opt_app/components/tab_select_card.dart';
 export 'package:opt_app/features/home/generate_diagnosis_page.dart';
 export 'package:uuid/uuid.dart';
-// export 'package:opt_app/features/onboarding/components/indicator.dart';
-// export 'package:opt_app/features/onboarding/components/text_component.dart';
+export 'package:opt_app/components/cached_image.dart';
 
 // * Utils
 // ? Extensions
@@ -78,6 +77,7 @@ export 'package:flutter_dotenv/flutter_dotenv.dart';
 export 'package:lottie/lottie.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:hive_flutter/hive_flutter.dart';
+export 'package:cached_network_image/cached_network_image.dart';
 
 // *Firebase
 export 'package:firebase_core/firebase_core.dart';

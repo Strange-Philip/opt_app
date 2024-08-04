@@ -76,10 +76,20 @@ class _MedicalHealthSelectState extends State<MedicalHealthSelect> {
                         .map((e) => GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  if (selectedMedicalHealth.contains(e.value)) {
+                                  if (e.value == "none" &&
+                                      selectedMedicalHealth.contains(e.value)) {
+                                    selectedMedicalHealth.clear();
+                                    selectedMedicalHealth.remove(e.value!);
+                                  } else if (e.value == "none" &&
+                                      !selectedMedicalHealth.contains(e.value)) {
+                                    selectedMedicalHealth.clear();
+                                    selectedMedicalHealth.add(e.value!);
+                                  } else if (e.value != "none" &&
+                                      selectedMedicalHealth.contains(e.value)) {
                                     selectedMedicalHealth.remove(e.value);
                                   } else {
                                     selectedMedicalHealth.add(e.value!);
+                                    selectedMedicalHealth.remove("none");
                                   }
                                 });
                               },

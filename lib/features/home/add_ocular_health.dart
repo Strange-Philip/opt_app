@@ -26,7 +26,7 @@ class _OcularHealthSelectState extends State<OcularHealthSelect> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>  MedicalHealthSelect(
+                builder: (context) => MedicalHealthSelect(
                   complaints: widget.complaints,
                   location: widget.location,
                   ocularHealth: selectedOcularHealth,
@@ -72,10 +72,19 @@ class _OcularHealthSelectState extends State<OcularHealthSelect> {
                         .map((e) => GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  if (selectedOcularHealth.contains(e.value)) {
+                                  if (e.value == "none" && selectedOcularHealth.contains(e.value)) {
+                                    selectedOcularHealth.clear();
+                                    selectedOcularHealth.remove(e.value!);
+                                  } else if (e.value == "none" &&
+                                      !selectedOcularHealth.contains(e.value)) {
+                                    selectedOcularHealth.clear();
+                                    selectedOcularHealth.add(e.value!);
+                                  } else if (e.value != "none" &&
+                                      selectedOcularHealth.contains(e.value)) {
                                     selectedOcularHealth.remove(e.value);
                                   } else {
                                     selectedOcularHealth.add(e.value!);
+                                    selectedOcularHealth.remove("none");
                                   }
                                 });
                               },

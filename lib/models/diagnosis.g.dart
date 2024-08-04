@@ -19,8 +19,8 @@ class DiagnosisAdapter extends TypeAdapter<Diagnosis> {
     return Diagnosis(
       diagnosis: fields[0] as String?,
       reason: fields[1] as String?,
-      symptoms: (fields[2] as List).cast<String>(),
-      ocularTests: (fields[3] as List).cast<String>(),
+      symptoms: (fields[2] as List).cast<dynamic>(),
+      ocularTests: (fields[3] as List).cast<dynamic>(),
     );
   }
 

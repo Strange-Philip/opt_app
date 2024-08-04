@@ -20,19 +20,22 @@ class SavedDiagnosisAdapter extends TypeAdapter<SavedDiagnosis> {
       id: fields[0] as String?,
       image: fields[1] as String?,
       diagnosisList: (fields[2] as List).cast<Diagnosis>(),
+      date: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, SavedDiagnosis obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.image)
       ..writeByte(2)
-      ..write(obj.diagnosisList);
+      ..write(obj.diagnosisList)
+      ..writeByte(3)
+      ..write(obj.date);
   }
 
   @override
