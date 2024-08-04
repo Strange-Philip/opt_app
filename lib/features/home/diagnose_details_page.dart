@@ -46,7 +46,7 @@ class _DiagnoseDetailsState extends State<DiagnoseDetails> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
                   image: DecorationImage(
-                    image: FileImage(File(widget.savedDiagnosis.image!)),
+                    image: NetworkImage(widget.savedDiagnosis.image!),
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -76,16 +76,23 @@ class _GenerateDiagnosisPageState extends State<GenerateDiagnosisPage> {
   }
 
   void uploadImage() async {
-    Reference ref = FirebaseStorage.instance.ref().child("pat_" "pic.jpg");
-    await ref.putFile(File(widget.path));
+    final storageRef = FirebaseStorage.instance.ref();
+    final imagesRef = storageRef.child("images/${"pat_${widget.path}" "pic.jpg"}");
 
-    ref.getDownloadURL().then((value) {
-      log(value);
+    try {
+      // Upload the file
+      await imagesRef.putFile(File(widget.path));
+
+      // Get the download URL
+      final downloadURL = await imagesRef.getDownloadURL();
+      log("Download URL: $downloadURL");
       setState(() {
-        imageLink = value;
+        imageLink = downloadURL;
       });
-      log(imageLink);
-    });
+      // Show the download URL
+    } catch (e) {
+      log("Error uploading image: $e");
+    }
   }
 
   void generateitinerary() {
