@@ -10,6 +10,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void didChangeDependencies() async {
+    setState(() {
+      diagnosesBox.get(0);
+    });
+
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -36,23 +45,36 @@ class _HomePageState extends State<HomePage> {
             ),
       body: diagnosesBox.isEmpty
           ? buildErrorPage()
-          : RefreshIndicator(
-              onRefresh: () async {
-                setState(() {
-                  diagnosesBox.get(0);
-                });
-              },
-              child: ListView.builder(
-                itemCount: diagnosesBox.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final SavedDiagnosis savedDiagnosis = diagnosesBox.getAt(index) as SavedDiagnosis;
-                  return DiagnosisHomeCard(
-                    diagnosis: savedDiagnosis,
-                    isLast: index == diagnosesBox.length - 1,
-                  );
+          : SizedBox(
+              height: double.infinity,
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {
+                    diagnosesBox.get(0);
+                  });
                 },
+                child: Column(
+                  children: [
+                    // Text(
+                    //   "Your Saved Diagnoses",
+                    //   style: AppTypography().largeSemiBold,
+                    // ),
+                    // const SizedBox(height: 12),
+                    ListView.builder(
+                      itemCount: diagnosesBox.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final SavedDiagnosis savedDiagnosis =
+                            diagnosesBox.getAt(index) as SavedDiagnosis;
+                        return DiagnosisHomeCard(
+                          diagnosis: savedDiagnosis,
+                          isLast: index == diagnosesBox.length - 1,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
     );

@@ -30,7 +30,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                "Welcome to \nOpt App",
+                "Welcome to \nEyeDxAi (Eye Diagnosis with AI)",
                 style: AppTypography().xxlMedium,
               ),
             ),
