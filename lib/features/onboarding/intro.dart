@@ -35,7 +35,7 @@ class IntroPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                "Welcome to \nOpt App",
+                "Welcome to \nEyeDxAi (Eye Diagnosis with AI)",
                 style: AppTypography().xxlMedium,
               ),
             ),

@@ -8,10 +8,10 @@ library opt_app;
 export "package:opt_app/features/onboarding/onboarding_page.dart";
 export "package:opt_app/features/home/homepage.dart";
 export 'package:opt_app/features/onboarding/intro.dart';
-export 'package:opt_app/features/home/select_location.dart';
-export 'package:opt_app/features/home/add_photo.dart';
-export 'package:opt_app/features/home/add_ocular_health.dart';
-export 'package:opt_app/features/home/add_medical_health.dart';
+export 'package:opt_app/features/home/generate_diagnosis_flow/select_location.dart';
+export 'package:opt_app/features/home/generate_diagnosis_flow/add_photo.dart';
+export 'package:opt_app/features/home/generate_diagnosis_flow/add_ocular_health.dart';
+export 'package:opt_app/features/home/generate_diagnosis_flow/add_medical_health.dart';
 export 'package:opt_app/features/home/diagnose_details_page.dart';
 
 // * Services
@@ -37,12 +37,13 @@ export 'package:opt_app/components/butttons/primary_button.dart';
 export 'package:opt_app/components/butttons/secondary_button.dart';
 export 'package:opt_app/components/appbar.dart';
 export 'package:opt_app/components/complaint_chip.dart';
-export 'package:opt_app/features/home/select_complaints.dart';
+export 'package:opt_app/features/home/generate_diagnosis_flow/select_complaints.dart';
 export 'package:opt_app/components/location_card.dart';
 export 'package:opt_app/components/tab_select_card.dart';
-export 'package:opt_app/features/home/generate_diagnosis_page.dart';
+export 'package:opt_app/features/home/generate_diagnosis_flow/generate_diagnosis_page.dart';
 export 'package:uuid/uuid.dart';
 export 'package:opt_app/components/cached_image.dart';
+export 'package:opt_app/components/cards/diagnosis_home_card.dart';
 
 // * Utils
 // ? Extensions

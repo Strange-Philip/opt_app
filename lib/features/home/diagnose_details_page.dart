@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:opt_app/components/cards/diagnosis_card.dart';
 import 'package:opt_app/library/opt_app.dart';
 import 'package:opt_app/models/savedDiagnosis.dart';
@@ -54,6 +55,28 @@ class _DiagnoseDetailsState extends State<DiagnoseDetails> {
                   )),
               const SizedBox(
                 height: 12,
+              ),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Date: ",
+                      style: AppTypography().largeSemiBold.copyWith(
+                            color: AppColors.black,
+                          ),
+                    ),
+                    TextSpan(
+                      text: DateFormat("dd/MM/yyy")
+                          .format(DateTime.parse(widget.savedDiagnosis.date!)),
+                      style: AppTypography().baseMedium.copyWith(color: AppColors.black),
+                    ),
+                  ],
+                ),
+                maxLines: 2,
+                textAlign: TextAlign.right,
+              ),
+              const SizedBox(
+                height: 8,
               ),
               Text(
                 "Tentative diagnosis for patient:",

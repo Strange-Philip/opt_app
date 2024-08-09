@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            "Home",
+            "Your Saved Diagnoses",
             style: AppTypography().largeSemiBold.copyWith(
                   color: AppColors.white,
                 ),
@@ -42,59 +42,17 @@ class _HomePageState extends State<HomePage> {
                   diagnosesBox.get(0);
                 });
               },
-              child: ListView(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: Text(
-                      "Your Saved Diagnoses",
-                      style: AppTypography().largeBold.copyWith(
-                            color: AppColors.black,
-                          ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  ListView.builder(
-                    itemCount: diagnosesBox.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final SavedDiagnosis savedDiagnosis =
-                          diagnosesBox.getAt(index) as SavedDiagnosis;
-                      return ListTile(
-                        title: Text(
-                          savedDiagnosis.diagnosisList.first.diagnosis!,
-                          style: AppTypography().largeSemiBold.copyWith(
-                                color: AppColors.black,
-                              ),
-                        ),
-                        isThreeLine: true,
-                        subtitle: Text(
-                          "${savedDiagnosis.diagnosisList.first.symptoms.join(", ")}\n${savedDiagnosis.date!}",
-                          style: AppTypography().baseRegular.copyWith(
-                                color: AppColors.gray,
-                              ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DiagnoseDetails(
-                                savedDiagnosis: savedDiagnosis,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+              child: ListView.builder(
+                itemCount: diagnosesBox.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final SavedDiagnosis savedDiagnosis = diagnosesBox.getAt(index) as SavedDiagnosis;
+                  return DiagnosisHomeCard(
+                    diagnosis: savedDiagnosis,
+                    isLast: index == diagnosesBox.length - 1,
+                  );
+                },
               ),
             ),
     );

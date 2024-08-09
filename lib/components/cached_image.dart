@@ -8,6 +8,7 @@ class CachedImageWidget extends StatelessWidget {
     this.width = 70,
     this.placeholder,
     this.errorWidget,
+    this.isSmall = false,
     this.fit = BoxFit.contain,
   }) : super(key: key);
 
@@ -16,7 +17,7 @@ class CachedImageWidget extends StatelessWidget {
   final double width;
   final Widget? placeholder;
   final Widget? errorWidget;
-
+  final bool? isSmall;
   final BoxFit fit;
 
   @override
@@ -32,27 +33,37 @@ class CachedImageWidget extends StatelessWidget {
                 color: AppColors.primary.shade100.withOpacity(0.7),
               ),
               child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Loading",
-                      style: AppTypography().largeMedium.copyWith(
-                            color: AppColors.primary,
+                child: isSmall!
+                    ? SizedBox(
+                        height: 25,
+                        width: 25,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3,
+                          backgroundColor: AppColors.primary.shade100.withOpacity(0.5),
+                          color: AppColors.primary,
+                        ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Loading",
+                            style: AppTypography().largeMedium.copyWith(
+                                  color: AppColors.primary,
+                                ),
                           ),
-                    ),
-                    const SizedBox(width: 10),
-                    SizedBox(
-                      height: 15,
-                      width: 15,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        backgroundColor: AppColors.primary.shade100.withOpacity(0.5),
-                        color: AppColors.primary,
+                          const SizedBox(width: 10),
+                          SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              backgroundColor: AppColors.primary.shade100.withOpacity(0.5),
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
               ),
             ),
         errorWidget: (context, url, error) =>
@@ -65,29 +76,45 @@ class CachedImageWidget extends StatelessWidget {
                 color: AppColors.red.shade100,
               ),
               child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Error loading image",
-                      style: AppTypography().largeMedium.copyWith(
-                            color: AppColors.red,
+                child: isSmall!
+                    ? SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: SvgPicture.asset(
+                          AppIcons.alertCircle,
+                          height: 20,
+                          width: 20,
+                          alignment: Alignment.center,
+                          fit: fit,
+                          colorFilter: ColorFilter.mode(
+                            AppColors.red,
+                            BlendMode.srcIn,
                           ),
-                    ),
-                    const SizedBox(width: 10),
-                    SvgPicture.asset(
-                      AppIcons.alertCircle,
-                      height: 20,
-                      width: 20,
-                      alignment: Alignment.center,
-                      fit: fit,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.red,
-                        BlendMode.srcIn,
+                        ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Error loading image",
+                            style: AppTypography().largeMedium.copyWith(
+                                  color: AppColors.red,
+                                ),
+                          ),
+                          const SizedBox(width: 10),
+                          SvgPicture.asset(
+                            AppIcons.alertCircle,
+                            height: 20,
+                            width: 20,
+                            alignment: Alignment.center,
+                            fit: fit,
+                            colorFilter: ColorFilter.mode(
+                              AppColors.red,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
               ),
             ),
         height: height,
