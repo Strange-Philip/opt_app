@@ -63,19 +63,22 @@ class DiagnosisHomeCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
-                        height: 80,
-                        width: 80,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: CachedImageWidget(
-                            image: diagnosis.image!,
-                            height: 80,
-                            width: 80,
-                            fit: BoxFit.fill,
-                            isSmall: true,
-                          ),
-                        )),
+                    Hero(
+                      tag: diagnosis.image!,
+                      child: SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: CachedImageWidget(
+                              image: diagnosis.image!,
+                              height: 80,
+                              width: 80,
+                              fit: BoxFit.fill,
+                              isSmall: true,
+                            ),
+                          )),
+                    ),
                   ],
                 ),
               ),

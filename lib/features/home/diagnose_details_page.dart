@@ -41,18 +41,21 @@ class _DiagnoseDetailsState extends State<DiagnoseDetails> {
         body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                  height: 200,
-                  width: double.infinity,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(14),
-                    child: CachedImageWidget(
-                      image: widget.savedDiagnosis.image!,
-                      height: 200,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  )),
+              Hero(
+                tag: widget.savedDiagnosis.image!,
+                child: SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(14),
+                      child: CachedImageWidget(
+                        image: widget.savedDiagnosis.image!,
+                        height: 200,
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    )),
+              ),
               const SizedBox(
                 height: 12,
               ),
